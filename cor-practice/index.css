@@ -1,0 +1,111 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+body {
+    padding: 5rem;
+    background-color: rgb(255, 234, 213);
+    display: flex;
+    gap: 5rem;
+}
+
+/*# player */
+
+.player {
+    display: flex;
+    background: rgba(253, 222, 192, 1);
+    border: 1px solid rgba(239, 185, 124, 1);
+    border-radius: 0.5rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.quote, .timer-container {
+    background: rgba(253, 222, 192, 1);
+    border: 1px solid rgba(239, 185, 124, 1);
+    border-radius: 0.5rem;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.player-and-quote-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
+    width: 31rem;
+}
+
+.player, .timer-container {
+    padding: 1rem;
+}
+
+/*# quote */
+
+.quote {
+    padding: 1rem;
+    gap: 1rem;
+    color: rgba(212, 156, 92, 1);
+}
+
+.quote-text {
+    background-color: rgb(255, 234, 213);
+    padding: 0.5rem 1rem;
+    border: 1px solid rgba(239, 185, 124, 1);
+    border-radius: 0.5rem;
+    font-style: italic;
+}
+
+.quote-buttons, .timer-buttons {
+    display: flex;
+    gap: 1rem;
+}
+
+.quote-buttons button, .timer-buttons button {
+    background: rgba(212, 156, 92, 1);
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+    color: white;
+}
+
+/*# timer */
+
+.timer-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.timer-container h2 {
+    color: white;
+    -webkit-text-stroke: 1px rgba(239, 185, 124, 1);
+}
+
+.timer-type {
+    display: flex;
+    gap: 1rem;
+}
+
+.timer-type a {
+    text-decoration: none;
+    color: rgba(212, 156, 92, 1);
+    display: block;
+    padding: 0.5rem;
+    border: 1px solid rgba(212, 156, 92, 1);
+    border-radius: 0.5rem;
+}
+
+.timer-type a:active {
+    background: rgba(212, 156, 92, 1);
+    color: white;
+}
+
+.timer {
+    font-size: 5rem;
+    color: white;
+    -webkit-text-stroke: 1px rgba(239, 185, 124, 1);
+}
+
+
