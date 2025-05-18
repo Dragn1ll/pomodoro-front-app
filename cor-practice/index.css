@@ -1,17 +1,46 @@
 * {
     box-sizing: border-box;
     margin: 0;
+    padding: 0;
 }
 
 body {
     padding: 5rem;
     background-color: rgb(255, 234, 213);
     display: flex;
-    gap: 5rem;
+    flex-direction: column;
+    gap: 2rem;
+    font-family: Arial, sans-serif;
 }
 
-/*# player */
+.top-section {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+}
 
+.timer-container {
+    background: rgba(253, 222, 192, 1);
+    border: 1px solid rgba(239, 185, 124, 1);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    flex: 50%;
+    min-width: 400px;
+    margin-left: 70px;
+}
+
+.player-and-quote-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    flex: 50%;
+    min-width: 300px;
+}
+
+/* Player styles */
 .player {
     display: flex;
     background: rgba(253, 222, 192, 1);
@@ -19,26 +48,9 @@ body {
     border-radius: 0.5rem;
     align-items: center;
     justify-content: center;
-}
-
-.quote, .timer-container {
-    background: rgba(253, 222, 192, 1);
-    border: 1px solid rgba(239, 185, 124, 1);
-    border-radius: 0.5rem;
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-}
-
-.player-and-quote-container {
-    display: flex;
-    flex-direction: column;
-    gap: 5rem;
-    width: 31rem;
-}
-
-.player, .timer-container {
     padding: 1rem;
+    gap: 1rem;
+    padding-top: 5rem;
 }
 .player {
     flex-direction: column;
@@ -89,12 +101,19 @@ body {
 }
 
 
-/*# quote */
-
+/* Quote styles */
 .quote {
+    background: rgba(253, 222, 192, 1);
+    border: 1px solid rgba(239, 185, 124, 1);
+    border-radius: 0.5rem;
     padding: 1rem;
     gap: 1rem;
     color: rgba(212, 156, 92, 1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 120px;
+    justify-content: space-between;
 }
 
 .quote-text {
@@ -103,55 +122,262 @@ body {
     border: 1px solid rgba(239, 185, 124, 1);
     border-radius: 0.5rem;
     font-style: italic;
+    width: 100%;
 }
 
-.quote-buttons, .timer-buttons {
+.quote-buttons {
     display: flex;
     gap: 1rem;
+    width: 100%;
+    justify-content: center;
 }
 
-.quote-buttons button, .timer-buttons button {
+/* Button styles */
+button {
     background: rgba(212, 156, 92, 1);
     border: none;
     border-radius: 0.5rem;
     padding: 0.5rem 1rem;
     color: white;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.2s;
 }
 
-/*# timer */
-
-.timer-container {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
+button:hover {
+    background: rgba(192, 136, 72, 1);
 }
 
-.timer-container h2 {
-    color: white;
-    -webkit-text-stroke: 1px rgba(239, 185, 124, 1);
+button:disabled {
+    background: rgba(212, 156, 92, 0.5);
+    cursor: not-allowed;
 }
 
-.timer-type {
-    display: flex;
-    gap: 1rem;
-}
-
-.timer-type a {
-    text-decoration: none;
-    color: rgba(212, 156, 92, 1);
-    display: block;
-    padding: 0.5rem;
-    border: 1px solid rgba(212, 156, 92, 1);
-    border-radius: 0.5rem;
-}
-
-.timer-type a:active {
-    background: rgba(212, 156, 92, 1);
-    color: white;
-}
-
+/* Timer styles */
 .timer {
     font-size: 5rem;
     color: white;
     -webkit-text-stroke: 1px rgba(239, 185, 124, 1);
+    text-align: center;
+    margin: 0.5rem 0;
 }
+
+.timer-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+}
+
+.timer-done {
+    background: #4CAF50 !important;
+}
+
+.timer-done:hover {
+    background: #3e8e41 !important;
+}
+
+.timer-skip {
+    background: #f44336 !important;
+}
+
+.timer-skip:hover {
+    background: #d32f2f !important;
+}
+
+/* Timer settings styles */
+.timer-settings {
+    background: rgba(255, 234, 213, 0.9);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid rgba(239, 185, 124, 1);
+    margin-bottom: 0.5rem;
+}
+
+.settings-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.toggle-settings {
+    padding: 0.3rem 0.8rem;
+    font-size: 0.9rem;
+}
+
+.settings-content.collapsed {
+    display: none;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.3rem;
+    color: rgba(212, 156, 92, 1);
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid rgba(239, 185, 124, 1);
+    border-radius: 0.5rem;
+    background-color: white;
+    font-size: 1rem;
+}
+
+.form-group textarea {
+    min-height: 80px;
+    resize: vertical;
+}
+
+.form-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+/* Tasks container */
+.tasks-container {
+    display: flex;
+    gap: 2rem;
+    width: 100%;
+}
+
+.tasks-queue,
+.completed-tasks {
+    background: rgba(253, 222, 192, 1);
+    border: 1px solid rgba(239, 185, 124, 1);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    flex: 1;
+}
+
+.task-item {
+    background: rgba(255, 234, 213, 1);
+    border: 1px solid rgba(239, 185, 124, 1);
+    border-radius: 0.5rem;
+    padding: 0.8rem 1rem;
+    margin-bottom: 0.8rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.2s;
+}
+
+.task-item.current {
+    background: rgba(212, 156, 92, 0.2);
+    border: 2px solid rgba(212, 156, 92, 1);
+}
+
+.task-info h4 {
+    margin-bottom: 0.3rem;
+    color: rgba(92, 64, 32, 1);
+}
+
+.task-info p {
+    color: rgba(128, 100, 64, 1);
+    font-size: 0.9rem;
+}
+
+.task-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.task-actions button {
+    min-width: 30px;
+    padding: 0.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.completed-task {
+    background: rgba(255, 234, 213, 1);
+    border: 1px solid rgba(239, 185, 124, 1);
+    border-radius: 0.5rem;
+    padding: 0.8rem 1rem;
+    margin-bottom: 0.8rem;
+}
+
+.completed-task h4 {
+    color: rgba(92, 64, 32, 1);
+    margin-bottom: 0.3rem;
+}
+
+.completed-task p {
+    color: rgba(128, 100, 64, 1);
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.add-task-btn {
+    width: 100%;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.task-form {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid rgba(239, 185, 124, 1);
+    margin-bottom: 1rem;
+}
+
+/* Mode switcher styles */
+.mode-switcher {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    justify-content: center;
+}
+
+.mode-switch {
+    padding: 0.5rem 1rem;
+    border: 1px solid rgba(239, 185, 124, 1);
+    border-radius: 0.5rem;
+    background: rgba(255, 234, 213, 1);
+    color: rgba(212, 156, 92, 1);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.mode-switch:hover {
+    background: rgba(253, 222, 192, 1);
+}
+
+.mode-switch.active {
+    background: rgba(212, 156, 92, 1);
+    color: white;
+}
+
+
+/* Completed tasks stats */
+.completed-stats {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: rgba(255, 234, 213, 0.7);
+    border-radius: 0.5rem;
+    border: 1px solid rgba(239, 185, 124, 1);
+}
+
+.completed-stats h4 {
+    color: rgba(92, 64, 32, 1);
+    margin-bottom: 0.5rem;
+}
+
+.completed-stats p {
+    color: rgba(128, 100, 64, 1);
+    font-size: 0.9rem;
