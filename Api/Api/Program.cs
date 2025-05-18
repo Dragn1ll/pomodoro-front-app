@@ -1,41 +1,108 @@
+using Api.Api.Pipeline;
+using Api.Domain.Abstractions;
+using Api.Domain.Entities;
+using Api.Domain.Models;
+using Api.Infrastructure;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            RequireExpirationTime = true,
+            IssuerSigningKey = new SymmetricSecurityKey(
+                "secretkeysecretkeysecretkeysecretkeysecretkeysecretkey"u8.ToArray()),
+            
+        };
+    });
+builder.Services.AddAuthorization();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.AddSecurityDefinition(JwtBearerDefaults.AuthenticationScheme, new OpenApiSecurityScheme
+    {
+        Description = "This is a JWT bearer authentication scheme",
+        Name = "Authorization",
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.Http,
+        Scheme = JwtBearerDefaults.AuthenticationScheme,
+    });
+
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement()
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = JwtBearerDefaults.AuthenticationScheme
+                },
+                Scheme = JwtBearerDefaults.AuthenticationScheme,
+                Name = JwtBearerDefaults.AuthenticationScheme,
+                In = ParameterLocation.Header,
+            },
+            new List<string>()
+        }
+    });
+
+
+});
+
+builder.Services.AddDbContext<ApiDbContext>(opt =>
+{
+    opt.UseInMemoryDatabase("ApiDatabase");
+});
+
+builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();
+builder.Services.AddScoped<JwtWorker>();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.MapOpenApi();
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+app.UseAuthentication();
+app.UseAuthorization();
 
-var summaries = new[]
+var userGroup = app.MapGroup("user");
+
+userGroup.MapPost("/register", async (RegisterUserRequest request, ApiDbContext apiDbContext, IPasswordHasher passwordHasher) =>
 {
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
+    await apiDbContext.Users.AddAsync(new User
+    {
+        Email = request.Email,
+        PasswordHash = passwordHasher.HashPassword(request.Password)
+    });
+    await apiDbContext.SaveChangesAsync();
+}).WithSummary("Register user");
 
-app.MapGet("/weatherforecast", () =>
+userGroup.MapPost("/login", async (LoginUserRequest request, 
+    ApiDbContext apiDbContext, 
+    IPasswordHasher passwordHasher,
+    JwtWorker jwtWorker) =>
 {
-    var forecast =  Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-})
-.WithName("GetWeatherForecast");
+    var user = await apiDbContext.Users.FirstOrDefaultAsync(u => u.Email == request.Email);
+    if (user == null)
+        return Results.NotFound();
+    if (!passwordHasher.VerifyHashedPassword(user.PasswordHash, request.Password))
+        return Results.BadRequest("wrong password");
+    return Results.Ok(new
+    {
+        Token = jwtWorker.CreateJwtToken(user)
+    });
+}).WithSummary("Login user");
 
+userGroup.MapGet("/all", async (ApiDbContext apiDbContext) => 
+    await apiDbContext.Users.AsNoTracking().ToListAsync())
+    .RequireAuthorization();
 app.Run();
-
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}
