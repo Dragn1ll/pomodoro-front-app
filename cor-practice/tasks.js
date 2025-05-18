@@ -1,9 +1,7 @@
-// Tasks variables
 let tasksQueue = [];
 let completedTasks = [];
 let currentTask = null;
 
-// DOM elements
 const addTaskBtn = document.querySelector('.add-task-btn');
 const taskForm = document.querySelector('.task-form');
 const saveTaskBtn = document.querySelector('.save-task');
@@ -11,12 +9,10 @@ const cancelTaskBtn = document.querySelector('.cancel-task');
 const tasksList = document.querySelector('.tasks-list');
 const completedList = document.querySelector('.completed-list');
 
-// Event listeners
 addTaskBtn.addEventListener('click', showTaskForm);
 saveTaskBtn.addEventListener('click', addNewTask);
 cancelTaskBtn.addEventListener('click', hideTaskForm);
 
-// Task functions
 function showTaskForm() {
     taskForm.style.display = 'block';
     addTaskBtn.style.display = 'none';
@@ -39,7 +35,7 @@ function addNewTask() {
             name: taskName,
             description: taskDescription,
             addedAt: new Date(),
-            startedAt: null, // Будет установлено при начале работы
+            startedAt: null,
             completed: false,
             timeSpent: 0
         };
@@ -58,7 +54,7 @@ function addNewTask() {
 function setNextTask() {
     if (tasksQueue.length > 0) {
         currentTask = tasksQueue[0];
-        currentTask.startedAt = new Date(); // Записываем время начала задачи
+        currentTask.startedAt = new Date(); 
         timeSpentOnCurrentTask = 0;
         renderTasksList();
     } else {
@@ -107,7 +103,6 @@ function renderTasksList() {
 function renderCompletedTasks() {
     completedList.innerHTML = '';
     
-    // Добавляем статистику
     const totalTime = completedTasks.reduce((sum, task) => sum + (task.timeSpent || 0), 0);
     const totalMinutes = Math.floor(totalTime / 60000);
     
@@ -119,7 +114,6 @@ function renderCompletedTasks() {
     `;
     completedList.appendChild(statsElement);
     
-    // Добавляем задачи
     completedTasks.slice().reverse().forEach(task => {
         const minutesSpent = Math.floor(task.timeSpent / 60000);
         const startTime = task.startedAt ? task.startedAt.toLocaleTimeString() : 'N/A';

@@ -40,7 +40,7 @@ body {
     min-width: 300px;
 }
 
-/* Player styles */
+/* player */
 .player {
     display: flex;
     background: rgba(253, 222, 192, 1);
@@ -101,7 +101,7 @@ body {
 }
 
 
-/* Quote styles */
+/* quote */
 .quote {
     background: rgba(253, 222, 192, 1);
     border: 1px solid rgba(239, 185, 124, 1);
@@ -132,7 +132,6 @@ body {
     justify-content: center;
 }
 
-/* Button styles */
 button {
     background: rgba(212, 156, 92, 1);
     border: none;
@@ -153,7 +152,7 @@ button:disabled {
     cursor: not-allowed;
 }
 
-/* Timer styles */
+/* timer*/
 .timer {
     font-size: 5rem;
     color: white;
@@ -185,7 +184,7 @@ button:disabled {
     background: #d32f2f !important;
 }
 
-/* Timer settings styles */
+/* timer settings */
 .timer-settings {
     background: rgba(255, 234, 213, 0.9);
     padding: 1rem;
@@ -244,7 +243,7 @@ button:disabled {
     margin-top: 1rem;
 }
 
-/* Tasks container */
+/* tasks */
 .tasks-container {
     display: flex;
     gap: 2rem;
@@ -336,7 +335,7 @@ button:disabled {
     margin-bottom: 1rem;
 }
 
-/* Mode switcher styles */
+/* mode switch */
 .mode-switcher {
     display: flex;
     gap: 0.5rem;
@@ -364,7 +363,7 @@ button:disabled {
 }
 
 
-/* Completed tasks stats */
+/* completed tasks stat */
 .completed-stats {
     margin-top: 1rem;
     padding: 1rem;
