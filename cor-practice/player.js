@@ -12,6 +12,16 @@ const durationElem = document.getElementById('duration');
 let tracks = [];
 let currentTrackIndex = 0;
 
+function loadTrack(index) {
+    if (tracks[index]) {
+        currentTrackIndex = index;
+        audio.src = tracks[index].url;
+        playlist.selectedIndex = index;
+        audio.play();
+        playPauseBtn.textContent = '⏸';
+    }
+}
+
 uploadButton.addEventListener('click', () => uploadInput.click());
 
 uploadInput.addEventListener('change', (e) => {
@@ -31,7 +41,7 @@ uploadInput.addEventListener('change', (e) => {
 playPauseBtn.addEventListener('click', () => {
     if (audio.paused) {
         audio.play();
-        playPauseBtn.textContent = '⏸';
+        playPauseBtn.textContent = '⏸️';
     } else {
         audio.pause();
         playPauseBtn.textContent = '▶️';
