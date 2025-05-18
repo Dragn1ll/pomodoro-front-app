@@ -4,8 +4,6 @@ document.addEventListener('DOMContentLoaded', function() {
     let timeLeft = 25 * 60;
     let isRunning = false;
     let currentMode = 'focus';
-    let cyclesCompleted = 0;
-    let focusCyclesForCurrentTask = 0;
     let timeSpentOnCurrentTask = 0;
     let timerStartTime = 0;
     let isSettingsCollapsed = true;
@@ -27,8 +25,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const doneButton = document.querySelector('.timer-done');
     const restartButton = document.querySelector('.timer-restart');
     const skipButton = document.querySelector('.timer-skip');
-    const currentModeDisplay = document.querySelector('.current-mode');
-    const cyclesCount = document.querySelector('.cycles-count');
     
     // Timer settings elements
     const saveTimerSettingsBtn = document.querySelector('.save-timer-settings');
@@ -127,15 +123,13 @@ document.addEventListener('DOMContentLoaded', function() {
     function completeTask() {
         if (currentTask) {
             // Увеличиваем счётчик циклов только если это не ручное переключение
-            cyclesCompleted++;
-            cyclesCount.textContent = cyclesCompleted;
+
             
             // Обновляем статистику задачи
-            currentTask.focusCycles = focusCyclesForCurrentTask;
             currentTask.timeSpent = timeSpentOnCurrentTask;
             currentTask.completedAt = new Date();
+            currentTask.startedAt = currentTask.startedAt || new Date();
             currentTask.completed = true;
-            currentTask.cycles = 1; // Каждая выполненная задача = 1 цикл
             
             // Перемещаем задачу в выполненные
             completedTasks.push(currentTask);
@@ -149,7 +143,6 @@ document.addEventListener('DOMContentLoaded', function() {
             setNextTask();
             
             // Сбрасываем счётчики
-            focusCyclesForCurrentTask = 0;
             timeSpentOnCurrentTask = 0;
             
             // Переключаем режим
@@ -196,7 +189,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             
             // Автоматическое переключение после завершения времени
-            if (focusSessionsBeforeLongBreak >= 4) {
+            if (focusSessionsBeforeLongBreak >= settings.cyclesBeforeLongBreak) {
                 switchMode('longBreak');
                 focusSessionsBeforeLongBreak = 0;
             } else {
@@ -218,8 +211,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         currentMode = mode;
-        currentModeDisplay.textContent = mode === 'focus' ? 'Focus' : 
-                                    mode === 'shortBreak' ? 'Short Break' : 'Long Break';
         
         // Обновляем активную кнопку режима
         focusModeBtn.classList.remove('active');

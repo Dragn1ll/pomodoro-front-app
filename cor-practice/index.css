@@ -114,11 +114,6 @@ button:disabled {
     margin: 0.5rem 0;
 }
 
-.current-mode {
-    color: rgba(212, 156, 92, 1);
-    font-weight: bold;
-}
-
 .timer-buttons {
     display: flex;
     gap: 1rem;
@@ -140,13 +135,6 @@ button:disabled {
 
 .timer-skip:hover {
     background: #d32f2f !important;
-}
-
-.cycle-counter {
-    color: rgba(212, 156, 92, 1);
-    font-size: 1.2rem;
-    text-align: center;
-    margin-bottom: 0.5rem;
 }
 
 /* Timer settings styles */

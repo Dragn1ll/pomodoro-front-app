@@ -39,8 +39,8 @@ function addNewTask() {
             name: taskName,
             description: taskDescription,
             addedAt: new Date(),
+            startedAt: null, // Будет установлено при начале работы
             completed: false,
-            focusCycles: 0,
             timeSpent: 0
         };
         
@@ -58,7 +58,7 @@ function addNewTask() {
 function setNextTask() {
     if (tasksQueue.length > 0) {
         currentTask = tasksQueue[0];
-        focusCyclesForCurrentTask = 0;
+        currentTask.startedAt = new Date(); // Записываем время начала задачи
         timeSpentOnCurrentTask = 0;
         renderTasksList();
     } else {
@@ -108,15 +108,12 @@ function renderCompletedTasks() {
     completedList.innerHTML = '';
     
     // Добавляем статистику
-    const totalCycles = completedTasks.reduce((sum, task) => sum + (task.cycles || 0), 0);
     const totalTime = completedTasks.reduce((sum, task) => sum + (task.timeSpent || 0), 0);
     const totalMinutes = Math.floor(totalTime / 60000);
     
     const statsElement = document.createElement('div');
     statsElement.className = 'completed-stats';
     statsElement.innerHTML = `
-        <h4>Summary</h4>
-        <p>Total cycles completed: ${totalCycles}</p>
         <p>Total time spent: ${totalMinutes} minutes</p>
         <p>Total tasks completed: ${completedTasks.length}</p>
     `;
@@ -125,8 +122,9 @@ function renderCompletedTasks() {
     // Добавляем задачи
     completedTasks.slice().reverse().forEach(task => {
         const minutesSpent = Math.floor(task.timeSpent / 60000);
-        const cycles = task.cycles || 0;
-        
+        const startTime = task.startedAt ? task.startedAt.toLocaleTimeString() : 'N/A';
+        const endTime = task.completedAt.toLocaleTimeString();
+
         const taskElement = document.createElement('div');
         taskElement.className = 'completed-task';
         taskElement.innerHTML = `
@@ -134,8 +132,8 @@ function renderCompletedTasks() {
             ${task.description ? `<p>${task.description}</p>` : ''}
             <div class="task-stats">
                 <span>Time spent: ${minutesSpent} min</span>
-                <span>Cycles: ${cycles}</span>
-                <span>Completed: ${task.completedAt.toLocaleString()}</span>
+                <span>Started: ${startTime}</span>
+                <span>Completed: ${endTime}</span>
             </div>
         `;
         
