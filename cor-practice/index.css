@@ -134,6 +134,14 @@ button:disabled {
     background: #3e8e41 !important;
 }
 
+.timer-skip {
+    background: #f44336 !important;
+}
+
+.timer-skip:hover {
+    background: #d32f2f !important;
+}
+
 .cycle-counter {
     color: rgba(212, 156, 92, 1);
     font-size: 1.2rem;
@@ -275,18 +283,6 @@ button:disabled {
     margin-bottom: 0.5rem;
 }
 
-.task-stats {
-    display: flex;
-    gap: 1rem;
-    font-size: 0.9rem;
-    color: rgba(92, 64, 32, 1);
-}
-
-.task-stats span {
-    display: flex;
-    align-items: center;
-}
-
 .add-task-btn {
     width: 100%;
     margin-bottom: 1rem;
@@ -302,4 +298,50 @@ button:disabled {
     border-radius: 0.5rem;
     border: 1px solid rgba(239, 185, 124, 1);
     margin-bottom: 1rem;
+}
+
+/* Mode switcher styles */
+.mode-switcher {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    justify-content: center;
+}
+
+.mode-switch {
+    padding: 0.5rem 1rem;
+    border: 1px solid rgba(239, 185, 124, 1);
+    border-radius: 0.5rem;
+    background: rgba(255, 234, 213, 1);
+    color: rgba(212, 156, 92, 1);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.mode-switch:hover {
+    background: rgba(253, 222, 192, 1);
+}
+
+.mode-switch.active {
+    background: rgba(212, 156, 92, 1);
+    color: white;
+}
+
+/* Completed tasks stats */
+.completed-stats {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: rgba(255, 234, 213, 0.7);
+    border-radius: 0.5rem;
+    border: 1px solid rgba(239, 185, 124, 1);
+}
+
+.completed-stats h4 {
+    color: rgba(92, 64, 32, 1);
+    margin-bottom: 0.5rem;
+}
+
+.completed-stats p {
+    color: rgba(128, 100, 64, 1);
+    font-size: 0.9rem;
 }
