@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Timer variables
     let timer;
     let timeLeft = 25 * 60;
     let isRunning = false;
@@ -7,17 +6,15 @@ document.addEventListener('DOMContentLoaded', function() {
     let timeSpentOnCurrentTask = 0;
     let timerStartTime = 0;
     let isSettingsCollapsed = true;
-    let focusSessionsBeforeLongBreak = 0; // Счетчик фокус-сессий перед long break
+    let focusSessionsBeforeLongBreak = 0;
     
-    // Timer settings
     let settings = {
         focusTime: 25,
         shortBreak: 5,
         longBreak: 15,
-        cyclesBeforeLongBreak: 4 // 3 short breaks + 1 long break
+        cyclesBeforeLongBreak: 4 
     };
     
-    // DOM elements
     const timerDisplay = document.querySelector('.timer');
     const startButton = document.querySelector('.timer-start');
     const pauseButton = document.querySelector('.timer-pause');
@@ -26,24 +23,21 @@ document.addEventListener('DOMContentLoaded', function() {
     const restartButton = document.querySelector('.timer-restart');
     const skipButton = document.querySelector('.timer-skip');
     
-    // Timer settings elements
     const saveTimerSettingsBtn = document.querySelector('.save-timer-settings');
     const toggleSettingsBtn = document.querySelector('.toggle-settings');
     const settingsContent = document.querySelector('.settings-content');
     
-    // Initialize
     updateTimerDisplay();
     loadSettings();
-    // Добавьте в начало файла
+
     const focusModeBtn = document.querySelector('.focus-mode');
     const shortBreakModeBtn = document.querySelector('.short-break-mode');
     const longBreakModeBtn = document.querySelector('.long-break-mode');
 
-    // Добавьте обработчики событий после инициализации
     focusModeBtn.addEventListener('click', () => switchMode('focus', true));
     shortBreakModeBtn.addEventListener('click', () => switchMode('shortBreak', true));
     longBreakModeBtn.addEventListener('click', () => switchMode('longBreak', true));
-    // Event listeners
+
     startButton.addEventListener('click', startTimer);
     pauseButton.addEventListener('click', pauseTimer);
     resumeButton.addEventListener('click', resumeTimer);
@@ -54,7 +48,6 @@ document.addEventListener('DOMContentLoaded', function() {
     saveTimerSettingsBtn.addEventListener('click', saveTimerSettings);
     toggleSettingsBtn.addEventListener('click', toggleSettings);
     
-    // Timer functions
     function updateTimerDisplay() {
         const minutes = Math.floor(timeLeft / 60);
         const seconds = timeLeft % 60;
@@ -86,7 +79,6 @@ document.addEventListener('DOMContentLoaded', function() {
             isRunning = false;
             timeSpentOnCurrentTask += (Date.now() - timerStartTime);
             
-            // Show resume and done buttons
             pauseButton.style.display = 'none';
             resumeButton.style.display = 'block';
             
@@ -112,7 +104,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }, 1000);
             
-            // Show pause and stop buttons
             resumeButton.style.display = 'none';
             pauseButton.style.display = 'block';
             doneButton.style.display = 'none';
@@ -122,30 +113,21 @@ document.addEventListener('DOMContentLoaded', function() {
     
     function completeTask() {
         if (currentTask) {
-            // Увеличиваем счётчик циклов только если это не ручное переключение
-
-            
-            // Обновляем статистику задачи
             currentTask.timeSpent = timeSpentOnCurrentTask;
             currentTask.completedAt = new Date();
             currentTask.startedAt = currentTask.startedAt || new Date();
             currentTask.completed = true;
             
-            // Перемещаем задачу в выполненные
             completedTasks.push(currentTask);
             tasksQueue.shift();
             
-            // Обновляем отображение
             renderTasksList();
             renderCompletedTasks();
-            
-            // Устанавливаем следующую задачу
+
             setNextTask();
-            
-            // Сбрасываем счётчики
+
             timeSpentOnCurrentTask = 0;
             
-            // Переключаем режим
             if (focusSessionsBeforeLongBreak >= 3) {
                 switchMode('longBreak');
                 focusSessionsBeforeLongBreak = 0;
@@ -188,7 +170,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 timeSpentOnCurrentTask += (settings.focusTime * 60 * 1000);
             }
             
-            // Автоматическое переключение после завершения времени
             if (focusSessionsBeforeLongBreak >= settings.cyclesBeforeLongBreak) {
                 switchMode('longBreak');
                 focusSessionsBeforeLongBreak = 0;
@@ -196,7 +177,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 switchMode('shortBreak');
             }
         } else {
-            // После перерыва автоматически переключаемся на фокус
             switchMode('focus');
         }
         
@@ -205,14 +185,12 @@ document.addEventListener('DOMContentLoaded', function() {
     
     function switchMode(mode, isManual = false) {
         if (isManual) {
-            // При ручном переключении сбрасываем таймер, но не считаем циклы
             pauseTimer();
-            focusSessionsBeforeLongBreak = 0; // Сбрасываем счётчик фокус-сессий
+            focusSessionsBeforeLongBreak = 0; 
         }
         
         currentMode = mode;
-        
-        // Обновляем активную кнопку режима
+    
         focusModeBtn.classList.remove('active');
         shortBreakModeBtn.classList.remove('active');
         longBreakModeBtn.classList.remove('active');
@@ -227,7 +205,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     function updateTimerButtons() {
-        // Reset all buttons
         startButton.style.display = 'none';
         pauseButton.style.display = 'none';
         resumeButton.style.display = 'none';
@@ -241,35 +218,29 @@ document.addEventListener('DOMContentLoaded', function() {
                 restartButton.style.display = 'block';
             } else {
                 if (resumeButton.style.display === 'block') {
-                    // Paused state
                     resumeButton.style.display = 'block';
                     doneButton.style.display = 'block';
                 } else {
-                    // Initial state
                     startButton.style.display = 'block';
                     restartButton.style.display = 'block';
                 }
             }
         } else {
-            // Break mode
             if (isRunning) {
                 pauseButton.style.display = 'block';
                 skipButton.style.display = 'block';
             } else {
                 if (resumeButton.style.display === 'block') {
-                    // Paused break
                     resumeButton.style.display = 'block';
                     skipButton.style.display = 'block';
                 } else {
-                    // Initial break state
                     startButton.style.display = 'block';
                     skipButton.style.display = 'block';
                 }
             }
         }
     }
-    
-    // Settings functions
+
     function saveTimerSettings() {
         settings.focusTime = parseInt(document.getElementById('focus-time').value);
         settings.shortBreak = parseInt(document.getElementById('short-break').value);
@@ -304,6 +275,5 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // Initialize with focus mode
     switchMode('focus');
 });
