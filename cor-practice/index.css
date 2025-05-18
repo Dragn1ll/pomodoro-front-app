@@ -5,7 +5,7 @@
 }
 
 body {
-    padding: 5rem;
+    padding: 2rem 5rem;
     background-color: rgb(255, 234, 213);
     display: flex;
     flex-direction: column;
@@ -28,8 +28,6 @@ body {
     flex-direction: column;
     gap: 1.5rem;
     flex: 50%;
-    min-width: 400px;
-    margin-left: 70px;
 }
 
 .player-and-quote-container {
@@ -38,6 +36,8 @@ body {
     gap: 2rem;
     flex: 50%;
     min-width: 300px;
+    align-self: stretch;
+    justify-content: space-between;
 }
 
 /* player */
@@ -50,11 +50,7 @@ body {
     justify-content: center;
     padding: 1rem;
     gap: 1rem;
-    padding-top: 5rem;
-}
-.player {
     flex-direction: column;
-    gap: 1rem;
 }
 
 #upload-button, .controls button, #playlist {
@@ -66,9 +62,14 @@ body {
     cursor: pointer;
 }
 
+#upload-button {
+    border-radius: 50%;
+    align-self: flex-end;
+    background: none;
+}
+
 .controls {
     display: flex;
-    gap: 1rem;
 }
 
 #progress {
@@ -186,10 +187,8 @@ button:disabled {
 
 /* timer settings */
 .timer-settings {
-    background: rgba(255, 234, 213, 0.9);
     padding: 1rem;
     border-radius: 0.5rem;
-    border: 1px solid rgba(239, 185, 124, 1);
     margin-bottom: 0.5rem;
 }
 
@@ -200,9 +199,18 @@ button:disabled {
     margin-bottom: 0.5rem;
 }
 
+.settings-header h3 {
+    color: rgba(212, 156, 92, 1);
+    font-size: 2rem;
+}
+
 .toggle-settings {
     padding: 0.3rem 0.8rem;
     font-size: 0.9rem;
+}
+
+.toggle-settings:hover {
+    background: none;
 }
 
 .settings-content.collapsed {
@@ -251,7 +259,7 @@ button:disabled {
 }
 
 .tasks-queue,
-.completed-tasks {
+.stats-container {
     background: rgba(253, 222, 192, 1);
     border: 1px solid rgba(239, 185, 124, 1);
     border-radius: 0.5rem;
@@ -319,12 +327,13 @@ button:disabled {
 }
 
 .add-task-btn {
-    width: 100%;
+    width: 50%;
     margin-bottom: 1rem;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
+    align-self: center;
 }
 
 .task-form {
@@ -362,6 +371,19 @@ button:disabled {
     color: white;
 }
 
+/* tasks queue*/
+
+.tasks-queue {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.tasks-queue > h3 {
+    font-size: 2rem;
+    color: rgb(212, 156, 92);
+    text-align: center;
+}
 
 /* completed tasks stat */
 .completed-stats {
@@ -388,7 +410,6 @@ button:disabled {
     border: 1px solid rgba(239, 185, 124, 1);
     border-radius: 0.5rem;
     padding: 1rem;
-    margin-top: 2rem;
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -426,6 +447,10 @@ button:disabled {
     display: none;
 }
 
+.toggle-settings, .controls button {
+    background: none;
+}
+
 /* Основной слой фона */
 .background-container {
     position: fixed;
@@ -441,6 +466,37 @@ button:disabled {
     pointer-events: none;
 }
 
+/* компоненты статистики*/
+
+.stats-container {
+    color: rgb(212, 156, 92);
+}
+
+.stats-container > h3 {
+    font-size: 2rem;
+    text-align: center;
+}
+
+.stats {
+    display: flex;
+    padding: 2rem;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.stat {
+    display: flex;
+    flex-direction: column;
+    background: #FFEAD5;
+    border-radius: 20%;
+    border: 1px solid #D49C5C;
+    padding: 1rem;
+    align-items: center;
+    text-align: center;
+    font-size: 1.5rem;
+    gap: 2rem;
+}
+
 /* Для мобильных устройств */
 @media (max-width: 768px) {
     body {
@@ -450,7 +506,7 @@ button:disabled {
     
     .player-and-quote-container {
         width: 100%;
-        gap: 2rem;
+        gap: 1rem;
     }
     
     .bg-upload-btn, .bg-reset-btn {
