@@ -10,18 +10,24 @@
     <body>
         <div class="player-and-quote-container">
             <section class="player">
-                <svg width="86" height="86" viewBox="0 0 86 86" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M8.25 39.9688C5.98952 41.2738 5.91874 44.4759 8.03809 45.8994L8.25 46.0312L57.75 74.6104C60.0832 75.9573 62.9998 74.2732 63 71.5791V14.4209C62.9998 11.8111 60.263 10.1494 57.9707 11.2725L57.75 11.3896L8.25 39.9688Z" fill="white" stroke="#EFB97C" stroke-width="3"/>
-                    <rect x="-1.5" y="1.5" width="9" height="55" rx="3.5" transform="matrix(-1 0 0 1 9 14)" fill="white" stroke="#EFB97C" stroke-width="3"/>
-                </svg>
-                <svg width="67" height="92" viewBox="0 0 67 92" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="43.5" y="1.5" width="22" height="89" rx="7.5" fill="white" stroke="#EFB97C" stroke-width="3"/>
-                    <rect x="1.5" y="1.5" width="22" height="89" rx="7.5" fill="white" stroke="#EFB97C" stroke-width="3"/>
-                </svg>
-                <svg width="86" height="86" viewBox="0 0 86 86" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M77.75 39.9688C80.0105 41.2738 80.0813 44.4759 77.9619 45.8994L77.75 46.0312L28.25 74.6104C25.9168 75.9573 23.0002 74.2732 23 71.5791V14.4209C23.0002 11.8111 25.737 10.1494 28.0293 11.2725L28.25 11.3896L77.75 39.9688Z" fill="white" stroke="#EFB97C" stroke-width="3"/>
-                    <rect x="75.5" y="15.5" width="9" height="55" rx="3.5" fill="white" stroke="#EFB97C" stroke-width="3"/>
-                </svg>
+                <input type="file" id="audio-upload" accept="audio/*" multiple hidden />
+                <button id="upload-button">Добавить треки</button>
+
+                <div class="controls">
+                    <button id="prev">⏮</button>
+                    <button id="play-pause">▶️</button>
+                    <button id="next">⏭</button>
+                </div>
+
+                <div class="progress-container">
+                    <span id="current-time">00:00</span>
+                    <input type="range" id="progress" value="0" min="0" max="100" />
+                    <span id="duration">00:00</span>
+                </div>
+
+                <select id="playlist" size="5"></select>
+
+                <audio id="audio" preload="metadata"></audio>
             </section>
 
             <section class="quote">
