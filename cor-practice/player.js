@@ -31,10 +31,15 @@ uploadInput.addEventListener('change', (e) => {
 playPauseBtn.addEventListener('click', () => {
     if (audio.paused) {
         audio.play();
-        playPauseBtn.textContent = '⏸';
+        playPauseBtn.innerHTML = '<svg width="63" height="91" viewBox="0 0 63 91" fill="none" xmlns="http://www.w3.org/2000/svg">\n' +
+            '<rect x="40.7887" y="1.5" width="19.908" height="87.5328" rx="7.5" fill="white" stroke="#EFB97C" stroke-width="3"/>\n' +
+            '<rect x="2.30334" y="1.5" width="19.908" height="87.5328" rx="7.5" fill="white" stroke="#EFB97C" stroke-width="3"/>\n' +
+            '</svg>\n';
     } else {
         audio.pause();
-        playPauseBtn.textContent = '▶️';
+        playPauseBtn.innerHTML = '<svg width="56" height="66" viewBox="0 0 56 66" fill="none" xmlns="http://www.w3.org/2000/svg">\n' +
+            '<path d="M52.3555 30.292C54.494 31.6179 54.5614 34.6733 52.5566 36.1074L52.3555 36.2412L7.74219 63.9033C5.41069 65.3489 2.3977 63.6719 2.39746 60.9287V5.60451C2.39746 2.86112 5.41059 1.18424 7.74219 2.6299L52.3555 30.292Z" fill="white" stroke="#EFB97C" stroke-width="3"/>\n' +
+            '</svg>';
     }
 });
 

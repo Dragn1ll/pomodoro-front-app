@@ -11,12 +11,32 @@
         <div class="player-and-quote-container">
             <section class="player">
                 <input type="file" id="audio-upload" accept="audio/*" multiple hidden />
-                <button id="upload-button">Добавить треки</button>
+                <button id="upload-button">
+                    <svg width="77" height="71" viewBox="0 0 77 71" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M38.5 67.45C57.6367 67.45 73.15 53.1455 73.15 35.5C73.15 17.8545 57.6367 3.54999 38.5 3.54999C19.3633 3.54999 3.85001 17.8545 3.85001 35.5C3.85001 53.1455 19.3633 67.45 38.5 67.45Z" fill="#D49C5C"/>
+                        <path d="M23.1 35.5H53.9" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M38.5 21.3V49.7" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </button>
 
                 <div class="controls">
-                    <button id="prev">⏮</button>
-                    <button id="play-pause">▶️</button>
-                    <button id="next">⏭</button>
+                    <button id="prev">
+                        <svg width="79" height="86" viewBox="0 0 79 86" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M7.64453 40.292C5.50604 41.6179 5.43863 44.6733 7.44336 46.1074L7.64453 46.2412L52.2578 73.9033C54.5893 75.3489 57.6023 73.6719 57.6025 70.9287V15.6045C57.6025 12.8611 54.5894 11.1842 52.2578 12.6299L7.64453 40.292Z" fill="white" stroke="#EFB97C" stroke-width="3"/>
+                            <rect x="-1.5" y="1.5" width="7.99582" height="54.0751" rx="3.5" transform="matrix(-1 0 0 1 7.99582 14.7289)" fill="white" stroke="#EFB97C" stroke-width="3"/>
+                        </svg>
+                    </button>
+                    <button id="play-pause">
+                        <svg width="56" height="66" viewBox="0 0 56 66" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M52.3555 30.292C54.494 31.6179 54.5614 34.6733 52.5566 36.1074L52.3555 36.2412L7.74219 63.9033C5.41069 65.3489 2.3977 63.6719 2.39746 60.9287V5.60451C2.39746 2.86112 5.41059 1.18424 7.74219 2.6299L52.3555 30.292Z" fill="white" stroke="#EFB97C" stroke-width="3"/>
+                        </svg>
+                    </button>
+                    <button id="next">
+                        <svg width="79" height="86" viewBox="0 0 79 86" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M71.3555 40.292C73.494 41.6179 73.5614 44.6733 71.5566 46.1074L71.3555 46.2412L26.7422 73.9033C24.4107 75.3489 21.3977 73.6719 21.3975 70.9287V15.6045C21.3975 12.8611 24.4106 11.1842 26.7422 12.6299L71.3555 40.292Z" fill="white" stroke="#EFB97C" stroke-width="3"/>
+                            <rect x="69.5042" y="16.2289" width="7.99582" height="54.0751" rx="3.5" fill="white" stroke="#EFB97C" stroke-width="3"/>
+                        </svg>
+                    </button>
                 </div>
 
                 <div class="progress-container">
@@ -42,8 +62,19 @@
             <!-- Настройки таймера -->
             <div class="timer-settings">
                 <div class="settings-header">
-                    <h3>Timer Settings</h3>
-                    <button class="toggle-settings">Expand</button>
+                    <h3>Do you wanna focus on?</h3>
+                    <button class="toggle-settings">
+                        <svg width="69" height="76" viewBox="0 0 69 76" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g clip-path="url(#clip0_2003_128)">
+                                <path d="M11.5 65.1109C10.9284 65.1101 10.3804 64.8633 9.97614 64.4248C9.57193 63.9862 9.34451 63.3916 9.34375 62.7714V49.7297C9.34582 49.1098 9.57309 48.5157 9.97625 48.0765L42.2941 13.0188C43.0204 12.2303 43.8827 11.6049 44.8318 11.1781C45.7809 10.7513 46.7982 10.5317 47.8256 10.5317C48.853 10.5317 49.8703 10.7513 50.8195 11.1781C51.7686 11.6049 52.6309 12.2303 53.3571 13.0188L57.3563 17.3577C58.083 18.1457 58.6595 19.0813 59.0528 20.111C59.4461 21.1408 59.6486 22.2446 59.6486 23.3593C59.6486 24.4739 59.4461 25.5777 59.0528 26.6075C58.6595 27.6372 58.083 28.5728 57.3563 29.3608L25.047 64.4246C24.8469 64.6427 24.609 64.8157 24.347 64.9335C24.0849 65.0512 23.804 65.1115 23.5204 65.1109H11.5ZM13.6562 50.6967V60.432H22.6262L45.3675 35.7584L36.3975 26.0262L13.6562 50.6967ZM48.4179 32.452L54.3145 26.0543C54.9716 25.3392 55.3406 24.3706 55.3406 23.3608C55.3406 22.351 54.9716 21.3824 54.3145 20.6673L50.3096 16.319C49.6509 15.6053 48.758 15.2044 47.8271 15.2044C46.8961 15.2044 46.0032 15.6053 45.3445 16.319L39.445 22.7198L48.4179 32.452Z" fill="#D49C5C"/>
+                            </g>
+                            <defs>
+                                <clipPath id="clip0_2003_128">
+                                    <rect width="69" height="74.8629" fill="white" transform="translate(0 0.385712)"/>
+                                </clipPath>
+                            </defs>
+                        </svg>
+                    </button>
                 </div>
                 <div class="settings-content collapsed">
                     <div class="form-group">
@@ -106,12 +137,12 @@
             </div>
         </div>
 
-        <div class="completed-tasks">
-            <h3>Completed Tasks</h3>
-            <div class="completed-list">
-                
+        <section class="stats-container">
+            <h3>Your Stats</h3>
+            <div class="stats">
+
             </div>
-        </div>
+        </section>
     </div>
 
     <script src="index.js"></script>
