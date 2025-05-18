@@ -51,16 +51,6 @@ async function copyToClipboard() {
     }
 }
 
-function loadTrack(index) {
-    if (tracks[index]) {
-        currentTrackIndex = index;
-        audio.src = tracks[index].url;
-        playlist.selectedIndex = index;
-        audio.play();
-        playPauseBtn.textContent = '⏸';
-    }
-}
-
 function formatTime(time) {
     if (isNaN(time)) return "00:00";
     const minutes = Math.floor(time / 60);
