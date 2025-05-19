@@ -4,6 +4,17 @@
     padding: 0;
 }
 
+.background-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100vw;
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+}
+
 body {
     padding: 2rem 5rem;
     background-color: rgb(255, 234, 213);
@@ -19,7 +30,7 @@ body {
     align-items: flex-start;
 }
 
-.timer-container {
+.timer-container{
     background: rgba(253, 222, 192, 1);
     border: 1px solid rgba(239, 185, 124, 1);
     border-radius: 0.5rem;
@@ -30,7 +41,7 @@ body {
     flex: 50%;
 }
 
-.player-and-quote-container {
+.player-and-quote-container,.timer-container-and-bg-container{
     display: flex;
     flex-direction: column;
     gap: 2rem;
@@ -103,7 +114,7 @@ body {
 
 
 /* quote */
-.quote {
+.quote{
     background: rgba(253, 222, 192, 1);
     border: 1px solid rgba(239, 185, 124, 1);
     border-radius: 0.5rem;
