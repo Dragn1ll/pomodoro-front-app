@@ -30,6 +30,8 @@ uploadInput.addEventListener('change', (e) => {
         tracks.push({ file, url: URL.createObjectURL(file) });
         const option = document.createElement('option');
         option.textContent = file.name;
+        option.style.background = 'rgba(255, 255, 255, 0)';
+        option.style.color = 'rgba(212, 156, 92, 1)';
         playlist.appendChild(option);
     });
 

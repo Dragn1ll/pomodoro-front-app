@@ -6,7 +6,7 @@ const saveQuoteBtn = document.querySelector('.quote-save');
 const fileInput = document.getElementById('bgUpload');
 const resetBtn = document.getElementById('resetBtn');
 const MAX_SIZE_MB = 5;
-
+const selectors = ['.bg-control-container','.button','.player', '.quote', '.timer-container', '.stats-container','.tasks-queue'];
 
 async function fetchQuote() {
     try {
@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Кнопка загрузки
   const uploadBtn = document.createElement('button');
   uploadBtn.className = 'bg-upload-btn';
-  uploadBtn.textContent = 'Изменить фон';
+  uploadBtn.textContent = 'Change background';
   
   // Скрытый input
   const fileInput = document.createElement('input');
@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Кнопка сброса
   const resetBtn = document.createElement('button');
   resetBtn.className = 'bg-reset-btn';
-  resetBtn.textContent = 'Сбросить фон';
+  resetBtn.textContent = 'Reset background';
   
   // Добавляем элементы
   bgControlContainer.appendChild(uploadBtn);
@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
   bgControlContainer.appendChild(resetBtn);
   
   // Вставляем в DOM
-  const quoteContainer = document.querySelector('.player-and-quote-container');
+  const quoteContainer = document.querySelector('.bg-container');
   if (quoteContainer) {
     quoteContainer.appendChild(bgControlContainer);
   } else {
@@ -138,6 +138,11 @@ document.addEventListener('DOMContentLoaded', () => {
       testImg.onload = function() {
         // Устанавливаем фон только после успешной загрузки
         bgDiv.style.backgroundImage = `url('${e.target.result}')`;
+        selectors.forEach(sel => {
+          document.querySelectorAll(sel).forEach(el => {
+            el.style.backgroundColor = 'rgba(255, 255, 255, 0.7)';
+          });
+        });
         try {
           localStorage.setItem('customBackground', e.target.result);
           console.log('Фон сохранен');
@@ -162,6 +167,11 @@ document.addEventListener('DOMContentLoaded', () => {
     bgDiv.style.backgroundImage = '';
     localStorage.removeItem('customBackground');
     fileInput.value = '';
+    selectors.forEach(sel => {
+          document.querySelectorAll(sel).forEach(el => {
+            el.style.backgroundColor = 'rgba(253, 222, 192, 1)';
+          });
+        });
   });
   
   // Восстановление фона
@@ -171,8 +181,18 @@ document.addEventListener('DOMContentLoaded', () => {
       // Проверяем валидность сохраненных данных
       if (savedBg.startsWith('data:image')) {
         bgDiv.style.backgroundImage = `url('${savedBg}')`;
+        selectors.forEach(sel => {
+          document.querySelectorAll(sel).forEach(el => {
+            el.style.backgroundColor = 'rgba(253, 222, 192, 0.7)';
+          });
+        });
       } else {
         localStorage.removeItem('customBackground');
+        selectors.forEach(sel => {
+          document.querySelectorAll(sel).forEach(el => {
+            el.style.backgroundColor = 'rgba(253, 222, 192, 1)';
+          });
+        });
       }
     }
   } catch (e) {

@@ -58,60 +58,66 @@
                 </div>
             </section>
         </div>
-        <section class="timer-container">
-            <!-- Настройки таймера -->
-            <div class="timer-settings">
-                <div class="settings-header">
-                    <h3>Do you wanna focus on?</h3>
-                    <button class="toggle-settings">
-                        <svg width="69" height="76" viewBox="0 0 69 76" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <g clip-path="url(#clip0_2003_128)">
-                                <path d="M11.5 65.1109C10.9284 65.1101 10.3804 64.8633 9.97614 64.4248C9.57193 63.9862 9.34451 63.3916 9.34375 62.7714V49.7297C9.34582 49.1098 9.57309 48.5157 9.97625 48.0765L42.2941 13.0188C43.0204 12.2303 43.8827 11.6049 44.8318 11.1781C45.7809 10.7513 46.7982 10.5317 47.8256 10.5317C48.853 10.5317 49.8703 10.7513 50.8195 11.1781C51.7686 11.6049 52.6309 12.2303 53.3571 13.0188L57.3563 17.3577C58.083 18.1457 58.6595 19.0813 59.0528 20.111C59.4461 21.1408 59.6486 22.2446 59.6486 23.3593C59.6486 24.4739 59.4461 25.5777 59.0528 26.6075C58.6595 27.6372 58.083 28.5728 57.3563 29.3608L25.047 64.4246C24.8469 64.6427 24.609 64.8157 24.347 64.9335C24.0849 65.0512 23.804 65.1115 23.5204 65.1109H11.5ZM13.6562 50.6967V60.432H22.6262L45.3675 35.7584L36.3975 26.0262L13.6562 50.6967ZM48.4179 32.452L54.3145 26.0543C54.9716 25.3392 55.3406 24.3706 55.3406 23.3608C55.3406 22.351 54.9716 21.3824 54.3145 20.6673L50.3096 16.319C49.6509 15.6053 48.758 15.2044 47.8271 15.2044C46.8961 15.2044 46.0032 15.6053 45.3445 16.319L39.445 22.7198L48.4179 32.452Z" fill="#D49C5C"/>
-                            </g>
-                            <defs>
-                                <clipPath id="clip0_2003_128">
-                                    <rect width="69" height="74.8629" fill="white" transform="translate(0 0.385712)"/>
-                                </clipPath>
-                            </defs>
-                        </svg>
-                    </button>
+        <div class="timer-container-and-bg-container">
+            <section class="timer-container">
+                <!-- Настройки таймера -->
+                <div class="timer-settings">
+                    <div class="settings-header">
+                        <h3>Do you wanna focus on?</h3>
+                        <button class="toggle-settings">
+                            <svg width="69" height="76" viewBox="0 0 69 76" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <g clip-path="url(#clip0_2003_128)">
+                                    <path
+                                        d="M11.5 65.1109C10.9284 65.1101 10.3804 64.8633 9.97614 64.4248C9.57193 63.9862 9.34451 63.3916 9.34375 62.7714V49.7297C9.34582 49.1098 9.57309 48.5157 9.97625 48.0765L42.2941 13.0188C43.0204 12.2303 43.8827 11.6049 44.8318 11.1781C45.7809 10.7513 46.7982 10.5317 47.8256 10.5317C48.853 10.5317 49.8703 10.7513 50.8195 11.1781C51.7686 11.6049 52.6309 12.2303 53.3571 13.0188L57.3563 17.3577C58.083 18.1457 58.6595 19.0813 59.0528 20.111C59.4461 21.1408 59.6486 22.2446 59.6486 23.3593C59.6486 24.4739 59.4461 25.5777 59.0528 26.6075C58.6595 27.6372 58.083 28.5728 57.3563 29.3608L25.047 64.4246C24.8469 64.6427 24.609 64.8157 24.347 64.9335C24.0849 65.0512 23.804 65.1115 23.5204 65.1109H11.5ZM13.6562 50.6967V60.432H22.6262L45.3675 35.7584L36.3975 26.0262L13.6562 50.6967ZM48.4179 32.452L54.3145 26.0543C54.9716 25.3392 55.3406 24.3706 55.3406 23.3608C55.3406 22.351 54.9716 21.3824 54.3145 20.6673L50.3096 16.319C49.6509 15.6053 48.758 15.2044 47.8271 15.2044C46.8961 15.2044 46.0032 15.6053 45.3445 16.319L39.445 22.7198L48.4179 32.452Z"
+                                        fill="#D49C5C" />
+                                </g>
+                                <defs>
+                                    <clipPath id="clip0_2003_128">
+                                        <rect width="69" height="74.8629" fill="white" transform="translate(0 0.385712)" />
+                                    </clipPath>
+                                </defs>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="settings-content collapsed">
+                        <div class="form-group">
+                            <label for="focus-time">Focus Time (minutes):</label>
+                            <input type="number" id="focus-time" min="1" value="25">
+                        </div>
+                        <div class="form-group">
+                            <label for="short-break">Short Break (minutes):</label>
+                            <input type="number" id="short-break" min="1" value="5">
+                        </div>
+                        <div class="form-group">
+                            <label for="long-break">Long Break (minutes):</label>
+                            <input type="number" id="long-break" min="1" value="15">
+                        </div>
+                        <div class="form-group">
+                            <label for="cycles-before-long-break">Cycles before Long Break:</label>
+                            <input type="number" id="cycles-before-long-break" min="1" value="4">
+                        </div>
+                        <button class="save-timer-settings">Save Timer Settings</button>
+                    </div>
                 </div>
-                <div class="settings-content collapsed">
-                    <div class="form-group">
-                        <label for="focus-time">Focus Time (minutes):</label>
-                        <input type="number" id="focus-time" min="1" value="25">
-                    </div>
-                    <div class="form-group">
-                        <label for="short-break">Short Break (minutes):</label>
-                        <input type="number" id="short-break" min="1" value="5">
-                    </div>
-                    <div class="form-group">
-                        <label for="long-break">Long Break (minutes):</label>
-                        <input type="number" id="long-break" min="1" value="15">
-                    </div>
-                    <div class="form-group">
-                        <label for="cycles-before-long-break">Cycles before Long Break:</label>
-                        <input type="number" id="cycles-before-long-break" min="1" value="4">
-                    </div>
-                    <button class="save-timer-settings">Save Timer Settings</button>
+        
+                <div class="mode-switcher">
+                    <button class="mode-switch focus-mode">Focus</button>
+                    <button class="mode-switch short-break-mode">Short Break</button>
+                    <button class="mode-switch long-break-mode">Long Break</button>
                 </div>
-            </div>
-
-            <div class="mode-switcher">
-                <button class="mode-switch focus-mode">Focus</button>
-                <button class="mode-switch short-break-mode">Short Break</button>
-                <button class="mode-switch long-break-mode">Long Break</button>
-            </div>
-            <h1 class="timer">25:00</h1>
-            <div class="timer-buttons">
-                <button class="timer-start">Start</button>
-                <button class="timer-pause" style="display: none;">Pause</button>
-                <button class="timer-resume" style="display: none;">Resume</button>
-                <button class="timer-done" style="display: none;">Done</button>
-                <button class="timer-restart">Stop</button>
-                <button class="timer-skip" style="display: none;">Skip</button>
-            </div>
-        </section>
+                <h1 class="timer">25:00</h1>
+                <div class="timer-buttons">
+                    <button class="timer-start">Start</button>
+                    <button class="timer-pause" style="display: none;">Pause</button>
+                    <button class="timer-resume" style="display: none;">Resume</button>
+                    <button class="timer-done" style="display: none;">Done</button>
+                    <button class="timer-restart">Stop</button>
+                    <button class="timer-skip" style="display: none;">Skip</button>
+                </div>
+            </section>
+            <section class="bg-container">
+            </section>
+        </div>
     </div>
     
     <div class="tasks-container">
