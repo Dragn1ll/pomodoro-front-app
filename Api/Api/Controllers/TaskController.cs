@@ -1,6 +1,7 @@
 using System.Security.Claims;
 using Api.Domain.DataAccess;
 using Api.Domain.DataAccess.Entities;
+using Api.Dto;
 using Api.Records;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -22,6 +23,7 @@ public class TaskController(AppDbContext context) : ControllerBase
         
             var tasks = await context.Tasks
                 .Where(t => t.UserId == userId)
+                .Select(t => new TaskDto(t))
                 .ToListAsync();
         
             return Ok(tasks);
@@ -45,7 +47,7 @@ public class TaskController(AppDbContext context) : ControllerBase
             if (task == null) 
                 return NotFound();
             
-            return Ok(task);
+            return Ok(new TaskDto(task));
 
         }
         catch (Exception exception)
@@ -90,18 +92,19 @@ public class TaskController(AppDbContext context) : ControllerBase
         {
             var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value!);
             
-            var affectedRows = await context.Tasks
-                .Where(t => t.Id == taskId && t.UserId == userId)
-                .ExecuteUpdateAsync(s => s
-                    .SetProperty(t => t.Description, task.Description)
-                    .SetProperty(t => t.Name, task.Name)
-                    .SetProperty(t => t.IsCompleted, task.Completed)
-                    .SetProperty(t => t.TimeSpent, task.TimeSpent)
-                    .SetProperty(t => t.StartedAt, task.StartedAt));
-            
-            if (affectedRows == 0) 
-                return NotFound();
-            
+            var existingTask = await context.Tasks
+                .FirstOrDefaultAsync(t => t.Id == taskId && t.UserId == userId);
+        
+            if (existingTask == null) 
+                return NotFound("Task not found or access denied");
+        
+            existingTask.Description = task.Description;
+            existingTask.Name = task.Name;
+            existingTask.IsCompleted = task.Completed;
+            existingTask.TimeSpent = task.TimeSpent;
+            existingTask.StartedAt = task.StartedAt;
+        
+            await context.SaveChangesAsync();
             return Ok();
         }
         catch (Exception exception)
@@ -117,13 +120,15 @@ public class TaskController(AppDbContext context) : ControllerBase
         {
             var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value!);
 
-            var affectedRows = await context.Tasks
-                .Where(t => t.UserId == userId && t.Id == taskId)
-                .ExecuteDeleteAsync();
-            
-            if (affectedRows == 0) 
-                return NotFound();
-            
+            var taskToDelete = await context.Tasks
+                .FirstOrDefaultAsync(t => t.Id == taskId && t.UserId == userId);
+        
+            if (taskToDelete == null) 
+                return NotFound("Task not found or access denied");
+        
+            context.Tasks.Remove(taskToDelete);
+            await context.SaveChangesAsync();
+        
             return Ok();
         }
         catch (Exception exception)

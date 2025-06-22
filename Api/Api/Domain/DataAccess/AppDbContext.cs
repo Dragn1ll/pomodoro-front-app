@@ -16,9 +16,4 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
         
         base.OnModelCreating(modelBuilder);
     }
-    
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        optionsBuilder.UseInMemoryDatabase("timer_db");
-    }
 }
