@@ -9,5 +9,9 @@ public class UserConfiguration : IEntityTypeConfiguration<UserEntity>
     public void Configure(EntityTypeBuilder<UserEntity> builder)
     {
         builder.HasKey(x => x.Id);
+        builder.Property(x => x.Id)
+            .ValueGeneratedOnAdd();
+        builder.HasIndex(x => x.Email)
+            .IsUnique();
     }
 }
