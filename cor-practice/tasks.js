@@ -182,47 +182,47 @@ async function loadTasks() {
             setNextTask();
         }
     } catch (error) {
-        console.error('Error loading tasks:', error);
+        console.log('Error loading tasks:', error);
     }
 }
 
-async function addNewTask() {
-    const taskName = document.getElementById('task-name').value.trim();
-    const taskDescription = document.getElementById('task-description').value.trim();
+// async function addNewTask() {
+//     const taskName = document.getElementById('task-name').value.trim();
+//     const taskDescription = document.getElementById('task-description').value.trim();
 
-    if (taskName) {
-        try {
-            const newTask = {
-                name: taskName,
-                description: taskDescription,
-                addedAt: new Date().toISOString(),
-                startedAt: null,
-                completed: false,
-                timeSpent: 0
-            };
+//     if (taskName) {
+//         try {
+//             const newTask = {
+//                 name: taskName,
+//                 description: taskDescription,
+//                 addedAt: new Date().toISOString(),
+//                 startedAt: null,
+//                 completed: false,
+//                 timeSpent: 0
+//             };
 
-            const response = await fetch(API_BASE_URL + '/add', {
-                method: 'POST',
-                headers: getAuthHeaders(),
-                body: JSON.stringify(newTask)
-            });
+//             const response = await fetch(API_BASE_URL + '/add', {
+//                 method: 'POST',
+//                 headers: getAuthHeaders(),
+//                 body: JSON.stringify(newTask)
+//             });
 
-            if (!response.ok) throw new Error('Failed to add task');
+//             if (!response.ok) throw new Error('Failed to add task');
 
-            const createdTask = await response.json();
-            tasksQueue.push(createdTask);
-            renderTasksList();
+//             const createdTask = await response.json();
+//             tasksQueue.push(createdTask);
+//             renderTasksList();
 
-            if (!currentTask) {
-                setNextTask();
-            }
+//             if (!currentTask) {
+//                 setNextTask();
+//             }
 
-            hideTaskForm();
-        } catch (error) {
-            console.error('Error adding task:', error);
-        }
-    }
-}
+//             hideTaskForm();
+//         } catch (error) {
+//             console.log('Error adding task:', error);
+//         }
+//     }
+// }
 
 async function updateTask(taskId, updates) {
     try {
@@ -241,25 +241,25 @@ async function updateTask(taskId, updates) {
     }
 }
 
-async function deleteTask(index) {
-    const taskId = tasksQueue[index].id;
+// async function deleteTask(index) {
+//     const taskId = tasksQueue[index].id;
 
-    try {
-        const response = await fetch(`${API_BASE_URL}/delete/${taskId}`, {
-            method: 'DELETE',
-            headers: getAuthHeaders()
-        });
+//     try {
+//         const response = await fetch(`${API_BASE_URL}/delete/${taskId}`, {
+//             method: 'DELETE',
+//             headers: getAuthHeaders()
+//         });
 
-        if (!response.ok) throw new Error('Failed to delete task');
+//         if (!response.ok) throw new Error('Failed to delete task');
 
-        tasksQueue.splice(index, 1);
-        renderTasksList();
+//         tasksQueue.splice(index, 1);
+//         renderTasksList();
 
-        if (index === 0) {
-            setNextTask();
-        }
-    } catch (error) {
-        console.error('Error deleting task:', error);
-        alert('Failed to delete task');
-    }
-}
+//         if (index === 0) {
+//             setNextTask();
+//         }
+//     } catch (error) {
+//         console.error('Error deleting task:', error);
+//         alert('Failed to delete task');
+//     }
+// }
